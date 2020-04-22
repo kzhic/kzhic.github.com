@@ -191,6 +191,69 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kzhic.github.io/2020/04/22/%E6%B5%85%E6%8B%B7%E8%B4%9D%20%E6%B7%B1%E6%8B%B7%E8%B4%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="kzhic">
+      <meta itemprop="description" content="记录生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="kzhic">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/22/%E6%B5%85%E6%8B%B7%E8%B4%9D%20%E6%B7%B1%E6%8B%B7%E8%B4%9D/" class="post-title-link" itemprop="url">浅拷贝 深拷贝</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-22 16:12:49 / 修改时间：17:54:33" itemprop="dateCreated datePublished" datetime="2020-04-22T16:12:49+08:00">2020-04-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="浅拷贝（Shallow-copy"><a href="#浅拷贝（Shallow-copy" class="headerlink" title="浅拷贝（Shallow copy)"></a>浅拷贝（Shallow copy)</h4><p>当执行浅拷贝时，被拷贝的对象的所有属性都被拷贝了，但是对象属性只是拷贝了其引用，也就是说，被拷贝了的对象中对象属性发生了改变，相应原来的对象对应的对象属性也会改变，因为其引用都指向同一个地址，clone()方法默认执行浅拷贝，示例代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShallowCopyDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">        <span class="keyword">private</span> ContactInfo contactInfo;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String name, <span class="keyword">int</span> age, ContactInfo contactInfo)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">            <span class="keyword">this</span>.contactInfo = contactInfo;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"name="</span> + name + <span class="string">", age= "</span> + age + <span class="string">", telephone="</span></span><br><span class="line">                + contactInfo.getTelephone()</span><br><span class="line">                + <span class="string">", mail="</span> + contactInfo.getMail();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入名字："</span>);</span><br><span class="line">        String name = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入年龄："</span>);</span><br><span class="line">        <span class="keyword">int</span> age = sc.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"*********** contanctinfo start *********"</span>);</span><br><span class="line">        System.out.println(<span class="string">"请输入电话号码："</span>);</span><br><span class="line">        String telephone = sc.next();</span><br><span class="line">        System.out.println(<span class="string">"请输入邮箱："</span>);</span><br><span class="line">        String mail = sc.next();</span><br><span class="line">        ContactInfo contactInfo = <span class="keyword">new</span> ContactInfo(telephone, mail);</span><br><span class="line">        System.out.println(<span class="string">"*********** contanctinfo end *********"</span>);</span><br><span class="line">        Person person = <span class="keyword">new</span> Person(name, age, contactInfo);</span><br><span class="line">        System.out.println(<span class="string">"最初的Person信息："</span>);</span><br><span class="line">        System.out.println(person.toString());</span><br><span class="line">        Person copiedPerson = (Person) person.clone();</span><br><span class="line">        System.out.println(<span class="string">"拷贝的Person信息："</span>);</span><br><span class="line">        System.out.println(copiedPerson.toString());</span><br><span class="line">        System.out.println(<span class="string">"************修改拷贝的Person start ***********"</span>);</span><br><span class="line">        copiedPerson.setName(<span class="string">"lisi"</span>);</span><br><span class="line">        copiedPerson.setAge(<span class="number">36</span>);</span><br><span class="line">        copiedPerson.contactInfo.setMail(<span class="string">"lisi@163.com"</span>);</span><br><span class="line">        System.out.println(<span class="string">"************修改拷贝的Person end ***********"</span>);</span><br><span class="line">        System.out.println(<span class="string">"最初的Person信息："</span>);</span><br><span class="line">        System.out.println(person.toString());</span><br><span class="line">        System.out.println(<span class="string">"拷贝的Person信息："</span>);</span><br><span class="line">        System.out.println(copiedPerson.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ContactInfo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String telephone;</span><br><span class="line">    <span class="keyword">private</span> String mail;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ContactInfo</span><span class="params">(String telephone, String mail)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.telephone = telephone;</span><br><span class="line">        <span class="keyword">this</span>.mail = mail;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getTelephone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> telephone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTelephone</span><span class="params">(String telephone)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.telephone = telephone;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mail;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMail</span><span class="params">(String mail)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mail = mail;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">请输入名字：</span><br><span class="line">zhangsan</span><br><span class="line">请输入年龄：</span><br><span class="line">30</span><br><span class="line">*********** contanctinfo start *********</span><br><span class="line">请输入电话号码：</span><br><span class="line">1234</span><br><span class="line">请输入邮箱：</span><br><span class="line">zhangsan@163.com</span><br><span class="line">*********** contanctinfo end *********</span><br><span class="line">最初的Person信息：</span><br><span class="line">name=zhangsan, age= 30, telephone=1234, mail=zhangsan@163.com</span><br><span class="line">拷贝的Person信息：</span><br><span class="line">name=zhangsan, age= 30, telephone=1234, mail=zhangsan@163.com</span><br><span class="line">************修改拷贝的Person start ***********</span><br><span class="line">************修改拷贝的Person end ***********</span><br><span class="line">最初的Person信息：</span><br><span class="line">name=zhangsan, age= 30, telephone=1234, mail=lisi@163.com</span><br><span class="line">拷贝的Person信息：</span><br><span class="line">name=lisi, age= 36, telephone=1234, mail=lisi@163.com</span><br></pre></td></tr></table></figure>
+<p>浅拷贝如下图所示：<br><img src="/images/shallow-copy.png" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://kzhic.github.io/2019/09/20/CentOS7.6%E4%B8%8A%E5%AE%89%E8%A3%85jenkins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -455,14 +518,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
