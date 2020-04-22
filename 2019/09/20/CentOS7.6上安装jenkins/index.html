@@ -235,7 +235,6 @@
             </span>
 
           
-            <div class="post-description">记录自己在腾讯云CentOS7.6上安装jenkins</div>
 
         </div>
       </header>
@@ -246,7 +245,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>自己使用的是root用户安装</p>
+        <p>记录自己在腾讯云CentOS7.6上安装jenkins</p>
+<a id="more"></a>
+
+<p>自己使用的是root用户安装</p>
 <p>1.增加jenkins仓库</p>
 <figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span><br><span class="line">rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key （第一次增加数字签名）</span><br></pre></td></tr></table></figure>
 <p>2.安装jdk（自己已经安装）</p>
